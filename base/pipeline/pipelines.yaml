@@ -22,10 +22,14 @@ spec:
     - default: 'image-registry.openshift-image-registry.svc:5000'
       name: REGISTRY_URL
       type: string
-    - name: NAMESPACE
+    - default: $(context.pipelineRun.namespace)
+      name: NAMESPACE
       type: string
     - default: .
       name: PATH_CONTEXT
+      type: string
+    - default: false
+      name: DEPLOY
       type: string
   tasks:
     - name: fetch-repository
@@ -88,7 +92,7 @@ spec:
             value: openshift-pipelines
         resolver: cluster
       when:
-        - input: DEPLOY
+        - input: $(params.DEPLOY)
           operator: in
           values:
             - 'true'
