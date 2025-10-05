@@ -16,7 +16,7 @@ spec:
     - default: 'https://github.com/shirodkar/elixirapp.git'
       name: GIT_REPO
       type: string
-    - default: ''
+    - default: main
       name: GIT_REVISION
       type: string
     - default: 'image-registry.openshift-image-registry.svc:5000/a-elixir-app/elixirapp'
@@ -85,5 +85,10 @@ spec:
           - name: namespace
             value: openshift-pipelines
         resolver: cluster
+      when:
+        - input: DEPLOY
+          operator: in
+          values:
+            - 'true'
   workspaces:
     - name: workspace
