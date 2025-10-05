@@ -1,0 +1,30 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: elixirapp
+  labels:
+    app: elixirapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elixirapp
+  template:
+    metadata:
+      labels:
+        app: elixirapp
+        deployment: elixirapp
+    spec:
+      containers:
+        - name: elixirapp
+          image: 'image-registry.openshift-image-registry.svc:5000/a-elixir-app/elixirapp@sha256:5169a027c27c844e75c9bda6557fa257ac6c0f756c2c52040ef41bb460dede44'
+          env:
+            - name: SECRET_KEY_BASE
+              value: AlTACgJs61IKbnkKbnyZGeh3qcZE6R7qCCDKp425ptH/wjoqe7Y2EK6wQJWyjMoD
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi

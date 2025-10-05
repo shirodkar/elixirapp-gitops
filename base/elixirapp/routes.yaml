@@ -1,0 +1,14 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: elixirapp
+  labels:
+    app: elixirapp
+spec:
+  to:
+    kind: Service
+    name: elixirapp
+    weight: 100
+  port:
+    targetPort: 4000-tcp
+  wildcardPolicy: None

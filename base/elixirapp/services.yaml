@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: elixirapp
+  labels:
+    app: elixirapp
+spec:
+  ipFamilies:
+    - IPv4
+  ports:
+    - name: 4000-tcp
+      protocol: TCP
+      port: 4000
+      targetPort: 4000
+  type: ClusterIP
+  selector:
+    app: elixirapp
+    deployment: elixirapp
